@@ -83,7 +83,7 @@ namespace ptrtools
 
             return *this;
          }
-         iterator &operator++(int) { auto tmp = *this; ++(*this); return tmp; }
+         iterator operator++(int) { auto &tmp = *this; ++(*this); return tmp; }
          bool operator==(const iterator &other) const { return other._base == this->_base && other._iter == this->_iter; }
          bool operator!=(const iterator &other) const { return !(*this == other); }
          iterator::reference operator*() {
@@ -139,7 +139,7 @@ namespace ptrtools
 
             return *this;
          }
-         const_iterator &operator++(int) { auto tmp = *this; ++(*this); return tmp; }
+         const_iterator operator++(int) { auto tmp = *this; ++(*this); return tmp; }
          bool operator==(const const_iterator &other) const { return other._base == this->_base && other._iter == this->_iter; }
          bool operator!=(const const_iterator &other) const { return !(*this == other); }
          const_iterator::reference operator*() {
@@ -197,7 +197,7 @@ namespace ptrtools
 
             return *this;
          }
-         reverse_iterator &operator++(int) { auto tmp = *this; ++(*this); return tmp; }
+         reverse_iterator operator++(int) { auto tmp = *this; ++(*this); return tmp; }
          bool operator==(const reverse_iterator &other) const { return other._base == this->_base && other._iter == this->_iter; }
          bool operator!=(const reverse_iterator &other) const { return !(*this == other); }
          reverse_iterator::reference operator*() {
@@ -256,7 +256,7 @@ namespace ptrtools
 
             return *this;
          }
-         const_reverse_iterator &operator++(int) { auto tmp = *this; ++(*this); return tmp; }
+         const_reverse_iterator operator++(int) { auto tmp = *this; ++(*this); return tmp; }
          bool operator==(const const_reverse_iterator &other) const { return other._base == this->_base && other._iter == this->_iter; }
          bool operator!=(const const_reverse_iterator &other) const { return !(*this == other); }
          const_reverse_iterator::reference operator*() {
