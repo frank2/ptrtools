@@ -72,7 +72,6 @@ namespace ptrtools
       using struct_ptr_decl::resize;
       using struct_ptr_decl::set;
       using struct_ptr_decl::clone;
-      using struct_ptr_decl::copy;
 
    public:
       FlexibleType &operator[](std::size_t index) { return this->flexible_array()[index]; }
@@ -134,14 +133,14 @@ namespace ptrtools
 
       array_ptr<FlexibleType,Allocator> flexible_array() {
          // keep the ptr object on the stack so it doesn't get passed as const to the constructor
-         auto ptr = this->ptr_at<FlexibleType,sizeof(FlexibleType),alignof(FlexibleType)>(this->adjusted_type_size(), false);
+         auto ptr = this->template ptr_at<FlexibleType,sizeof(FlexibleType),alignof(FlexibleType)>(this->adjusted_type_size(), false);
          auto result = array_ptr<FlexibleType,Allocator>(ptr);
          result.resize(this->elements());
 
          return result;
       }
       const array_ptr<FlexibleType,Allocator> flexible_array() const {
-         auto ptr = this->ptr_at<FlexibleType,sizeof(FlexibleType),alignof(FlexibleType)>(this->adjusted_type_size(), false);
+         auto ptr = this->template ptr_at<FlexibleType,sizeof(FlexibleType),alignof(FlexibleType)>(this->adjusted_type_size(), false);
          auto result = array_ptr<FlexibleType,Allocator>(ptr);
          result.resize(this->elements());
 

@@ -24,7 +24,7 @@ namespace ptrtools
    class basic_ptr
    {
       static_assert(!std::is_same<T,void>::value, "Type cannot be void");
-      static_assert(std::is_same<Allocator::value_type,std::uint8_t>::value, "Allocator must be a byte allocator (unsigned char/uint8_t)");
+      static_assert(std::is_same<typename Allocator::value_type,std::uint8_t>::value, "Allocator must be a byte allocator (unsigned char/uint8_t)");
 
    public:
       using value_type = T;
@@ -273,11 +273,11 @@ namespace ptrtools
          }
       };
 
-      basic_ptr(bool allocate=false) : _ptr(reinterpret_cast<pointer>(nullptr)), _size(0), _allocator(std::nullopt) {
+      basic_ptr(bool allocate=false) : _ptr(static_cast<pointer>(nullptr)), _size(0), _allocator(std::nullopt) {
          if (allocate)
             this->allocate(this->type_size);
       }
-      basic_ptr(std::size_t size) : _ptr(reinterpret_cast<pointer>(nullptr)), _size(0), _allocator(std::nullopt) {
+      basic_ptr(std::size_t size) : _ptr(static_cast<pointer>(nullptr)), _size(0), _allocator(std::nullopt) {
          if (size > 0)
             this->allocate(size);
       }
@@ -432,7 +432,7 @@ namespace ptrtools
 
          this->_allocator->deallocate(reinterpret_cast<std::uint8_t *>(this->get()), this->size());
          this->_allocator = std::nullopt;
-         this->_ptr = reinterpret_cast<pointer>(nullptr);
+         this->_ptr = static_cast<pointer>(nullptr);
          this->_size = 0;
       }
       void reallocate(std::size_t size) {
