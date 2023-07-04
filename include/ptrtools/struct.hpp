@@ -18,10 +18,10 @@ namespace ptrtools
       using allocator = Allocator;
 
    private:
-      using basic_ptr_decl::iterator;
-      using basic_ptr_decl::const_iterator;
-      using basic_ptr_decl::reverse_iterator;
-      using basic_ptr_decl::const_reverse_iterator;
+      using typename basic_ptr_decl::iterator;
+      using typename basic_ptr_decl::const_iterator;
+      using typename basic_ptr_decl::reverse_iterator;
+      using typename basic_ptr_decl::const_reverse_iterator;
 
    public:
       struct_ptr(bool allocate=false) : basic_ptr_decl(allocate) {}
